@@ -11,11 +11,3 @@ Welcome to the **Agritech Platform**! This is an innovative platform designed to
 - **Investments**: Investors can invest in listed projects, helping farmers get the resources they need.
 - **Gallery**: Projects can have image galleries to showcase their progress and impact.
 
-## Installation
-
-To get started, follow these steps:
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/yourusername/agritech-platform.git
-   cd agritech-platform
