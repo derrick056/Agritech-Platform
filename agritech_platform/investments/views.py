@@ -18,3 +18,7 @@ def investment_list(request):
 def investment_detail(request, id):
     investment = Investment.objects.get(id=id)
     return render(request, 'investment/investment_detail.html', {'investment': investment})
+
+class InvestmentViewSet(viewsets.ModelViewSet):
+    queryset = Investment.objects.all()
+    serializer_class = InvestmentSerializer

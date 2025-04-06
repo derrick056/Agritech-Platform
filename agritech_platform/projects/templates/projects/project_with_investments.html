@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ project.title }} - Investments</title>
+</head>
+<body>
+    <h1>{{ project.title }}</h1>
+    <p>{{ project.description }}</p>
+    <h3>Investments</h3>
+    <ul>
+        {% for investment in investments %}
+            <li>{{ investment.investor_name }} invested ${{ investment.amount_invested }} on {{ investment.invested_at }}</li>
+        {% empty %}
+            <p>No investments yet.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
