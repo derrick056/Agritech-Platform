@@ -1,13 +1,11 @@
-from django.shortcuts import render
-
-# Create your views here.
-from rest_framework import views, response
+from rest_framework import viewsets, permissions
+from .models import Investment
 from .serializers import InvestmentSerializer
 
-class InvestmentCreateView(views.APIView):
-    def post(self, request):
-        serializer = InvestmentSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return response.Response({'message': 'Investment recorded successfully'})
-        return response.Response(serializer.errors, status=400)
+class InvestmentViewSet(viewsets.ModelViewSet):
+    queryset = Investment.objects.all().order_by('-invested_at')
+    serializer_class = InvestmentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(investor=self.request.user)

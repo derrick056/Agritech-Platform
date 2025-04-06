@@ -1,13 +1,11 @@
-from django.shortcuts import render
-
-# Create your views here.
-from rest_framework import views, response
+from rest_framework import viewsets, permissions
+from .models import Project
 from .serializers import ProjectSerializer
 
-class ProjectCreateView(views.APIView):
-    def post(self, request):
-        serializer = ProjectSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return response.Response({'message': 'Project created successfully'})
-        return response.Response(serializer.errors, status=400)
+class ProjectViewSet(viewsets.ModelViewSet):
+    queryset = Project.objects.all().order_by('-created_at')
+    serializer_class = ProjectSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)

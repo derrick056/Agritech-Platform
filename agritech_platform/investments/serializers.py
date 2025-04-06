@@ -4,4 +4,4 @@ from .models import Investment
 class InvestmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Investment
-        fields = ['user', 'project', 'amount_invested']
+        fields = '__all__'
